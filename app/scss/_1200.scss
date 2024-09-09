@@ -1,0 +1,173 @@
+@media (max-width: 1200px) {
+    body {
+        overflow: initial;
+    }
+
+    .header {
+        .container {
+            top: 30px;
+        }
+
+        .menu {
+            display: none;
+        }
+
+        .btn {
+            display: none;
+        }
+
+        &__lang {
+            display: none;
+        }
+
+        &__burger {
+            display: block;
+        }
+    }
+
+    h1,
+    .h1 {
+        font-size: 40px;
+    }
+
+    h2,
+    .h2 {
+        font-size: 30px;
+    }
+
+    h3,
+    .h3 {
+        font-size: 23px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .btn {
+        font-size: 18px;
+    }
+
+    .hero {
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        &__img {
+            margin: auto;
+        }
+
+        .btn {
+            margin-top: 30px;
+        }
+    }
+
+    .for-desktop {
+        display: none;
+    }
+
+    .for-mobile {
+        display: block;
+    }
+
+    .join-us {
+        .container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        &__img {
+            order: 1;
+            overflow: hidden;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+
+    .instruments {
+        height: auto;
+
+        &__list {
+            display: grid;
+        }
+
+        &__item {
+            position: relative;
+            margin-top: 0;
+
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+        }
+
+        .swiper1 {
+            display: none;
+        }
+    }
+
+    .how {
+        .container {
+            &::before {
+                display: none;
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__list {
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        &__item {
+            text-align: center;
+        }
+    }
+
+    .calendar {
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        &__img {
+            order: 1;
+        }
+    }
+
+    .doors {
+        .container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .footer {
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        &__copyright {
+            grid-column: initial;
+        }
+    }
+
+    .reviews {
+        &__item {
+            &::before {
+                display: none;
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__box {
+            max-width: 100%;
+        }
+    }
+}

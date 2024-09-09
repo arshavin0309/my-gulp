@@ -1,22 +1,31 @@
 const { src, dest, watch, parallel, series } = require('gulp');
 
-const scss = require('gulp-sass')(require('sass'));
-const concat = require('gulp-concat');
+const scss = require('gulp-sass')(require('sass')); //преобразование scss/sass в css
+const concat = require('gulp-concat'); // объединение файлов
 const uglify = require('gulp-uglify-es').default;
-const browserSync = require('browser-sync').create();
-const autoprefixer = require('gulp-autoprefixer');
-const clean = require('gulp-clean');
-const avif = require('gulp-avif');
-const webp = require('gulp-webp');
-const imagemin = require('gulp-imagemin');
+const browserSync = require('browser-sync').create(); // запускает локальный сервер
+const autoprefixer = require('gulp-autoprefixer'); // приводит css к кросбраузерности
+const clean = require('gulp-clean'); // удаление папок
+const avif = require('gulp-avif'); // конвертер в avif
+const webp = require('gulp-webp'); // конвертер в webp
+const imagemin = require('gulp-imagemin'); // сжимание картинок
 const newer = require('gulp-newer'); // кэш
-const svgSprite = require('gulp-svg-sprite');
-const include = require('gulp-include');
+const svgSprite = require('gulp-svg-sprite'); // объединение svg картинок в 1 файл
+const include = require('gulp-include'); // подключение html к html
+const typograf = require('gulp-typograf');
+
+function resources() {
+    return src('app/upload/**/*')
+        .pipe(dest('dist/upload'))
+}
 
 function pages() {
     return src('app/pages/*.html')
         .pipe(include({
             includePaths: 'app/components'
+        }))
+        .pipe(typograf({
+            locale: ['ru', 'en-US']
         }))
         .pipe(dest('app'))
         .pipe(browserSync.stream())
@@ -39,7 +48,7 @@ function images() {
 }
 
 function sprite() {
-    return src('app/images/*.svg')
+    return src('app/images/src/*.svg')
         .pipe(svgSprite({
             mode: {
                 stack: {
@@ -52,7 +61,7 @@ function sprite() {
 }
 
 function scripts() {
-    return src(['node_modules/swiper/swiper-bundle.js', 'app/js/main.js'])
+    return src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery-ui/dist/jquery-ui.js', 'node_modules/swiper/swiper-bundle.js', 'app/js/main.js'])
         .pipe(concat('main.min.js'))
         .pipe(uglify())
         .pipe(dest('app/js'))
@@ -63,9 +72,17 @@ function styles() {
     return src('app/scss/style.scss')
         .pipe(autoprefixer({ overrideBrowserslist: ['last 10 version'] }))
         .pipe(concat('style.min.css'))
+
+        // без минификации
+        // .pipe(scss({
+        //     outputStyle: 'expanded'
+        // }))
+
+        // с минификацией
         .pipe(scss({
             outputStyle: 'compressed'
         }))
+
         .pipe(dest('app/css'))
         .pipe(browserSync.stream())
 }
@@ -76,11 +93,12 @@ function watching() {
             baseDir: 'app/'
         }
     });
-    watch(['app/scss/style.scss'], styles)
+    watch(['app/scss/**/*.scss'], styles)
     watch(['app/images/src'], images)
     watch(['app/js/main.js'], scripts)
     watch(['app/components/**/*.html', 'app/pages/**/*.html'], pages)
     watch(['app/*.html']).on('change', browserSync.reload)
+    watch(['app/upload/**/*'], resources)
 }
 
 function cleanDist() {
@@ -90,13 +108,15 @@ function cleanDist() {
 
 function building() {
     return src([
-        'app/css/style.min.css',
+        // 'app/css/style.min.css',
+        'app/css/**/*.css',
         '!app/images/**/*.html',
         'app/images/*.*',
-        '!app/images/*.svg',
+        // '!app/images/*.svg',
         'app/images/sprite.svg',
         'app/js/main.min.js',
-        'app/**/*.html'
+        'app/**/*.html',
+        'app/upload/**/*'
     ], { base: 'app' })
         .pipe(dest('dist'))
 }

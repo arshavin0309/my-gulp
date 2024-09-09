@@ -1,6 +1,38 @@
+@import '../../node_modules/normalize.css/normalize';
 @import '../../node_modules/swiper/swiper-bundle';
+@import '../scss/keyframes';
 
-body {
-    background: black;
-    color: white;
+:root {
+    
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope', sans-serif;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--violet) var(--body-bg);
+
+    &::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--body-bg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--violet);
+        border-radius: 5px;
+        border: 3px solid var(--body-bg);
+    }
+}
+
+@import '../scss/_min1000';
+@import '../scss/_1200';
+@import '../scss/_992';
+@import '../scss/_768';
+@import '../scss/_500';
