@@ -2,7 +2,7 @@ const { src, dest, watch, parallel, series } = require('gulp');
 
 const scss = require('gulp-sass')(require('sass')); //преобразование scss/sass в css
 const concat = require('gulp-concat'); // объединение файлов
-const uglify = require('gulp-uglify-es').default;
+const uglify = require('gulp-uglify-es').default; //используется для минификации js
 const browserSync = require('browser-sync').create(); // запускает локальный сервер
 const autoprefixer = require('gulp-autoprefixer'); // приводит css к кросбраузерности
 const clean = require('gulp-clean'); // удаление папок
@@ -12,7 +12,7 @@ const imagemin = require('gulp-imagemin'); // сжимание картинок
 const newer = require('gulp-newer'); // кэш
 const svgSprite = require('gulp-svg-sprite'); // объединение svg картинок в 1 файл
 const include = require('gulp-include'); // подключение html к html
-const typograf = require('gulp-typograf');
+const typograf = require('gulp-typograf'); //расставляет неразрывные пробелы в нужных местах
 
 function resources() {
     return src('app/upload/**/*')
@@ -67,7 +67,10 @@ function sprite() {
 function scripts() {
     return src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery-ui/dist/jquery-ui.js', 'node_modules/swiper/swiper-bundle.js', 'app/js/main.js'])
         .pipe(concat('main.min.js'))
-        .pipe(uglify())
+        .pipe(uglify({
+            compress: true,
+            mangle: false
+        }))
         .pipe(dest('app/js'))
         .pipe(browserSync.stream())
 }
@@ -134,4 +137,4 @@ exports.scripts = scripts;
 exports.watching = watching;
 
 exports.build = series(cleanDist, building);
-exports.default = parallel(styles, images, scripts, pages, watching);
+exports.default = series(styles, images, scripts, pages, watching);
