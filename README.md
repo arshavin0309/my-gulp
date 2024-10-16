@@ -6,7 +6,8 @@
 
 - Собирает и минифицирует в один файл js: jquery, jquery-ui, swiperjs и сам файл js/main.js
 
-- Файлы html можно подключать (к примеру header и footer) через `<!--=include header.html -->`
+- Файлы html можно подключать через `<!--=include header.html -->`
+> К примеру header и footer
 
 - Вывод title через js, в зависимости от урла
 
