@@ -70,6 +70,7 @@
 │   │   ├── 992.scss                # min-width: 992px
 │   │   ├── 900.scss                # min-width: 900px
 │   │   ├── 768.scss                # min-width: 768px
+│   │   ├── 700.scss                # min-width: 700px
 │   │   ├── 600.scss                # min-width: 600px
 │   │   ├── 500.scss                # min-width: 500px
 │   │   └── 360.scss                # min-width: 360px
