@@ -37,7 +37,7 @@ function pages() {
 function images() {
     return src(['app/images/src/*.*', '!app/images/src/*.svg'])
         .pipe(newer('app/images/'))
-        .pipe(avif({ quality: 50 }))
+        .pipe(avif({ quality: 90 }))
 
         .pipe(src('app/images/src/*.*'))
         .pipe(newer('app/images/'))
@@ -120,7 +120,7 @@ function building() {
         '!app/images/**/*.html',
         'app/images/*.*',
         // '!app/images/*.svg',
-        'app/images/sprite.svg',
+        // 'app/images/sprite.svg',
         'app/js/main.min.js',
         'app/**/*.html',
         'app/upload/**/*'
