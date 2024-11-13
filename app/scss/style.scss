@@ -3,7 +3,8 @@
 @import '../scss/keyframes';
 
 :root {
-    
+    --black: #000;
+    --white: #fff;
 }
 
 * {
@@ -13,7 +14,7 @@
     font-family: 'Manrope', sans-serif;
 
     scrollbar-width: thin;
-    scrollbar-color: var(--violet) var(--body-bg);
+    scrollbar-color: var(--black) var(--white);
 
     &::-webkit-scrollbar {
         height: 12px;
@@ -21,13 +22,65 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: var(--body-bg);
+        background: var(--white);
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: var(--violet);
+        background-color: var(--black);
         border-radius: 5px;
-        border: 3px solid var(--body-bg);
+        border: 3px solid var(--white);
+    }
+}
+
+.upButton {
+    z-index: 1000;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 15px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    transform: scale(0);
+    pointer-events: none;
+    background: var(--yellow) url(../images/up-btn.svg) center / 20px no-repeat;
+    border-radius: 50%;
+
+    &.show {
+        transition: all 1s ease-in-out;
+        transform: scale(1);
+        pointer-events: all;
+    }
+}
+
+.cookies {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    margin-left: auto;
+    max-width: 450px;
+    gap: 20px;
+    align-items: start;
+    background: #333333;
+    padding: 25px;
+    border-radius: 5px;
+    color: var(--white);
+
+    p {
+        font-size: 16px;
+    }
+
+    a {
+        color: var(--white);
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 10px 30px;
+        font-size: 14px;
     }
 }
 
