@@ -188,3 +188,22 @@ tableShow.on('click', showTr);
 tableHide.on('click', hideTr);
 
 // табы для таблиц (конец)
+
+// плавная прокрутка до якоря (начало)
+
+const anchors = document.querySelectorAll('a[href*="#"]')
+
+for (let anchor of anchors) {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault()
+
+        const blockID = anchor.getAttribute('href').substr(1)
+
+        document.getElementById(blockID).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    })
+}
+
+// плавная прокрутка до якоря (конец)
