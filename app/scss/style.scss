@@ -45,6 +45,7 @@
     pointer-events: none;
     background: var(--yellow) url(../images/up-btn.svg) center / 20px no-repeat;
     border-radius: 50%;
+    box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
 
     &.show {
         transition: all 1s ease-in-out;
