@@ -36,10 +36,10 @@ function trackScroll() {
     let scrolled = window.pageYOffset;
 
     if (scrolled > 100) {
-        $('.upButton').addClass('show')
+        $('.upButton').addClass('show');
     }
     if (scrolled < 100) {
-        $('.upButton').removeClass('show')
+        $('.upButton').removeClass('show');
     }
 }
 
@@ -102,27 +102,27 @@ document.querySelector('.cookies .btn').addEventListener('click', () => {
 
 // мобильное меню (начало)
 
-let menuItem = $('.header .menu > .menu-item')
-let subMenu = $('.header .menu > .menu-item .sub-menu')
+let menuItem = $('.header .menu > .menu-item');
+let subMenu = $('.header .menu > .menu-item .sub-menu');
 
 if ($(window).width() <= 1024) {
 
     $('.header__burger').on('click', function () {
-        $('.header__burger').toggleClass('active')
-        $('.header__box').toggleClass('active')
-        $('.header .menu').toggleClass('active')
+        $('.header__burger').toggleClass('active');
+        $('.header__box').toggleClass('active');
+        $('.header .menu').toggleClass('active');
 
-        subMenu.slideUp()
-        menuItem.removeClass('active')
+        subMenu.slideUp();
+        menuItem.removeClass('active');
     })
 
     $('.upButton').on('click', function () {
-        $('.header__burger').removeClass('active')
-        $('.header__box').removeClass('active')
-        $('.header .menu').removeClass('active')
+        $('.header__burger').removeClass('active');
+        $('.header__box').removeClass('active');
+        $('.header .menu').removeClass('active');
 
-        subMenu.slideUp()
-        menuItem.removeClass('active')
+        subMenu.slideUp();
+        menuItem.removeClass('active');
     });
 
     for (let i = 0; i < menuItem.length; i++) {
@@ -130,15 +130,15 @@ if ($(window).width() <= 1024) {
 
             if (menuItem.eq(i).hasClass('active')) {
 
-                menuItem.eq(i).removeClass('active')
-                subMenu.eq(i).slideUp()
+                menuItem.eq(i).removeClass('active');
+                subMenu.eq(i).slideUp();
 
             } else {
-                subMenu.slideUp()
-                menuItem.removeClass('active')
+                subMenu.slideUp();
+                menuItem.removeClass('active');
 
-                subMenu.eq(i).slideDown()
-                menuItem.eq(i).addClass('active')
+                subMenu.eq(i).slideDown();
+                menuItem.eq(i).addClass('active');
             }
         })
     }
