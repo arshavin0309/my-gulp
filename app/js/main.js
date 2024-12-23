@@ -1,29 +1,33 @@
-// Установка title !!! ДЛЯ CMS НЕ ПОНАДОБИТЬСЯ (начало)
+// Установка title
+// Если заголовка нет, он будет установлен
+// !!! ДЛЯ CMS НЕ ПОНАДОБИТЬСЯ (начало)
 
-if (document.location.pathname === '/') { document.title = 'Главная' };
-if (document.location.pathname === '/start.html') { document.title = 'С чего начать?' };
-if (document.location.pathname === '/404.html') { document.title = 'Страница не найдена' };
-if (document.location.pathname === '/terms.html') { document.title = 'Условия торговли' };
-if (document.location.pathname === '/terms-of-trade.html') { document.title = 'Условия торговли' };
-if (document.location.pathname === '/platform.html') { document.title = 'Торговая платформа' };
-if (document.location.pathname === '/strategies.html') { document.title = 'Торговые стратегии' };
-if (document.location.pathname === '/schedule.html') { document.title = 'Часы работы рынка' };
-if (document.location.pathname === '/analytics.html') { document.title = 'Аналитика рынка' };
-if (document.location.pathname === '/review.html') { document.title = 'Обзор рынка' };
-if (document.location.pathname === '/condition.html') { document.title = 'Состояние рынка' };
-if (document.location.pathname === '/calendar.html') { document.title = 'Экономический календарь' };
-if (document.location.pathname === '/news.html') { document.title = 'Новости рынка' };
-if (document.location.pathname === '/forecasts.html') { document.title = 'Прогнозы рынка' };
-if (document.location.pathname === '/currencies.html') { document.title = 'Валюты' };
-if (document.location.pathname === '/cryptocurrencies.html') { document.title = 'Криптовалюты' };
-if (document.location.pathname === '/stocks.html') { document.title = 'Акции' };
-if (document.location.pathname === '/ies.html') { document.title = 'Индексы' };
-if (document.location.pathname === '/raw-materials.html') { document.title = 'Сырье' };
-if (document.location.pathname === '/history.html') { document.title = 'История компании' };
-if (document.location.pathname === '/why.html') { document.title = 'Почему мы?' };
-if (document.location.pathname === '/documents.html') { document.title = 'Документы' };
-if (document.location.pathname === '/about.html') { document.title = 'О Patronus Investments' };
-if (document.location.pathname === '/contacts.html') { document.title = 'Контакты' };
+if (!document.title) {
+    if (document.location.pathname === '/') { document.title = 'Главная' };
+    if (document.location.pathname === '/start.html') { document.title = 'С чего начать?' };
+    if (document.location.pathname === '/404.html') { document.title = 'Страница не найдена' };
+    if (document.location.pathname === '/terms.html') { document.title = 'Условия торговли' };
+    if (document.location.pathname === '/terms-of-trade.html') { document.title = 'Условия торговли' };
+    if (document.location.pathname === '/platform.html') { document.title = 'Торговая платформа' };
+    if (document.location.pathname === '/strategies.html') { document.title = 'Торговые стратегии' };
+    if (document.location.pathname === '/schedule.html') { document.title = 'Часы работы рынка' };
+    if (document.location.pathname === '/analytics.html') { document.title = 'Аналитика рынка' };
+    if (document.location.pathname === '/review.html') { document.title = 'Обзор рынка' };
+    if (document.location.pathname === '/condition.html') { document.title = 'Состояние рынка' };
+    if (document.location.pathname === '/calendar.html') { document.title = 'Экономический календарь' };
+    if (document.location.pathname === '/news.html') { document.title = 'Новости рынка' };
+    if (document.location.pathname === '/forecasts.html') { document.title = 'Прогнозы рынка' };
+    if (document.location.pathname === '/currencies.html') { document.title = 'Валюты' };
+    if (document.location.pathname === '/cryptocurrencies.html') { document.title = 'Криптовалюты' };
+    if (document.location.pathname === '/stocks.html') { document.title = 'Акции' };
+    if (document.location.pathname === '/ies.html') { document.title = 'Индексы' };
+    if (document.location.pathname === '/raw-materials.html') { document.title = 'Сырье' };
+    if (document.location.pathname === '/history.html') { document.title = 'История компании' };
+    if (document.location.pathname === '/why.html') { document.title = 'Почему мы?' };
+    if (document.location.pathname === '/documents.html') { document.title = 'Документы' };
+    if (document.location.pathname === '/about.html') { document.title = 'О Patronus Investments' };
+    if (document.location.pathname === '/contacts.html') { document.title = 'Контакты' };
+}
 
 // Установка title (конец)
 
