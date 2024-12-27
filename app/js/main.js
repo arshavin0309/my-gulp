@@ -21,7 +21,7 @@ if (!document.title) {
     if (document.location.pathname === '/cryptocurrencies.html') { document.title = 'Криптовалюты' };
     if (document.location.pathname === '/stocks.html') { document.title = 'Акции' };
     if (document.location.pathname === '/ies.html') { document.title = 'Индексы' };
-    if (document.location.pathname === '/raw-materials.html') { document.title = 'Сырье' };
+    if (document.location.pathname === '/raw-materials.html' || '/commodities.html') { document.title = 'Сырье' };
     if (document.location.pathname === '/history.html') { document.title = 'История компании' };
     if (document.location.pathname === '/why.html') { document.title = 'Почему мы?' };
     if (document.location.pathname === '/documents.html') { document.title = 'Документы' };
