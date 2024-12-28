@@ -108,22 +108,25 @@ document.querySelector('.cookies .btn').addEventListener('click', () => {
 
 let menuItem = $('.header .menu > .menu-item');
 let subMenu = $('.header .menu > .menu-item .sub-menu');
+let burger = $('.header__burger'); // кнопка открытия мобильного меню
+let headerMenu = $('.header .menu'); // меню хедера
+let headerBox = $('.header__box'); // блок внутри контейнера хедера, например если он в виде острова и при выпадении мобильного меню, нужно его дополнительно стилизовать
 
 if ($(window).width() <= 1024) {
 
-    $('.header__burger').on('click', function () {
-        $('.header__burger').toggleClass('active');
-        $('.header__box').toggleClass('active');
-        $('.header .menu').toggleClass('active');
+    burger.on('click', function () {
+        burger.toggleClass('active');
+        headerBox.toggleClass('active');
+        headerMenu.toggleClass('active');
 
         subMenu.slideUp();
         menuItem.removeClass('active');
     })
 
     $('.upButton').on('click', function () {
-        $('.header__burger').removeClass('active');
-        $('.header__box').removeClass('active');
-        $('.header .menu').removeClass('active');
+        burger.removeClass('active');
+        headerBox.removeClass('active');
+        headerMenu.removeClass('active');
 
         subMenu.slideUp();
         menuItem.removeClass('active');
