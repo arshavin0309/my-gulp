@@ -153,9 +153,11 @@ function trackScroll() {
 
     if (scrolled > 100) {
         $('.upButton').addClass('show');
+        $('.header').addClass('scrolled');
     }
     if (scrolled < 100) {
         $('.upButton').removeClass('show');
+        $('.header').removeClass('scrolled');
     }
 }
 
