@@ -208,13 +208,25 @@ function setCookie(name, value, options = {}) {
 }
 
 if (!getCookie('cookies')) {
-    document.querySelector('.cookies').style = 'display: flex'
+    $('.cookies').style = 'display: flex';
 }
 
-document.querySelector('.cookies .btn').addEventListener('click', () => {
-    document.querySelector('.cookies').style = 'display: none'
-    setCookie('cookies', 'true', { 'max-age': 3600 * 24 * 365 })
+$('.cookies .btn').on('click', () => {
+    $('.cookies').style = 'display: none';
+    setCookie('cookies', 'true', { 'max-age': 3600 * 24 * 365 });
 })
+
+switch (lang) {
+    case 'ru':
+        $('.cookies__info').html('Мы используем файлы cookie, чтобы больше узнать о том, как вы пользуетесь нашим сайтом, и что мы можем улучшить.');
+        $('.cookies .btn').html('Принять');
+        break;
+
+    default:
+        $('.cookies__info').html('We use cookies to learn more about how you use our website and what we can improve.');
+        $('.cookies .btn').html('Accept');
+        break;
+}
 
 // окно с предупреждением о куки (конец)
 
@@ -226,7 +238,7 @@ let burger = $('.header__burger'); // кнопка открытия мобиль
 let headerMenu = $('.header .menu'); // меню хедера
 let headerBox = $('.header__box'); // блок внутри контейнера хедера, например если он в виде острова и при выпадении мобильного меню, нужно его дополнительно стилизовать
 
-if ($(window).width() <= 1024) {
+if ($(window).width() <= 1200) {
 
     burger.on('click', function () {
         burger.toggleClass('active');
@@ -315,7 +327,7 @@ tableHide.on('click', hideTr);
 const anchors = document.querySelectorAll('a[href*="#"]')
 
 for (let anchor of anchors) {
-    anchor.addEventListener('click', function (e) {
+    anchor.on('click', function (e) {
         e.preventDefault()
 
         const blockID = anchor.getAttribute('href').substr(1)
