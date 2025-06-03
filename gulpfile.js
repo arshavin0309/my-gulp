@@ -13,6 +13,7 @@ const newer = require('gulp-newer'); // кэш
 const svgSprite = require('gulp-svg-sprite'); // объединение svg картинок в 1 файл
 const include = require('gulp-include'); // подключение html к html
 const typograf = require('gulp-typograf'); //расставляет неразрывные пробелы в нужных местах
+const fs = require('fs');
 
 function resources() {
     return src('app/upload/**/*')
@@ -113,15 +114,22 @@ function watching() {
     });
     watch(['app/scss/**/*.scss'], styles)
     watch(['app/images/src'], images)
-    watch(['app/js/main.js'], scripts)
+    watch(['app/js/**/*.js', '!app/js/main.min.js',], scripts)
     watch(['app/components/**/*.html', 'app/pages/**/*.html'], pages)
     watch(['app/*.html']).on('change', browserSync.reload)
     watch(['app/upload/**/*'], resources)
 }
 
 function cleanDist() {
-    return src('dist')
-        .pipe(clean())
+    // Проверяем, существует ли папка dist
+    if (fs.existsSync('dist')) {
+        return src('dist', { allowEmpty: true })
+            .pipe(clean());
+    } else {
+        // Возвращаем "пустой" поток, чтобы Gulp не упал
+        const { Readable } = require('stream');
+        return new Readable({ read() { this.push(null); } });
+    }
 }
 
 function building() {
