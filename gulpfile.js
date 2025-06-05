@@ -40,12 +40,16 @@ function images() {
     return src(['app/images/src/*.*', '!app/images/src/*.svg'])
         .pipe(newer('app/images/'))
         .pipe(avif({ quality: 90 }))
-        .pipe(dest('app/images/'))
-        .pipe(webp())
-        .pipe(dest('app/images/'))
-        .pipe(imagemin())
-        .pipe(dest('app/images/'))
 
+        .pipe(src('app/images/src/*.*'))
+        .pipe(newer('app/images/'))
+        .pipe(webp())
+        
+        .pipe(src('app/images/src/*.*'))
+        .pipe(newer('app/images/'))
+        .pipe(imagemin())
+
+        .pipe(dest('app/images/'))
         .pipe(browserSync.stream())
 }
 
@@ -109,12 +113,12 @@ function watching() {
         ghostMode: false
     });
 
-    watch(['app/scss/**/*.scss'], styles)
-    watch(['app/images/src/**/*.*'], images)
-    watch(['app/js/**/*.js', '!app/js/main.min.js',], scripts)
-    watch(['app/components/**/*.html', 'app/pages/**/*.html'], pages)
-    watch(['app/*.html']).on('change', browserSync.reload)
-    watch(['app/upload/**/*'], resources)
+    watch(['app/scss/**/*.scss'], styles);
+    watch(['app/images/src/**/*.*'], images);
+    watch(['app/js/**/*.js', '!app/js/main.min.js',], scripts);
+    watch(['app/components/**/*.html', 'app/pages/**/*.html'], pages);
+    watch(['app/*.html']).on('change', browserSync.reload);
+    watch(['app/upload/**/*'], resources);
 }
 
 function cleanDist() {
@@ -141,6 +145,7 @@ function building() {
         'app/*.html',
         'app/upload/**/*',
         'app/web.config',
+        'app/favicon.png',
     ], { base: 'app' })
         .pipe(dest('dist'))
 }
