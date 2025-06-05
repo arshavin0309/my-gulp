@@ -12,9 +12,9 @@ const imagemin = require('gulp-imagemin'); // сжимание картинок
 const newer = require('gulp-newer'); // кэш
 const svgSprite = require('gulp-svg-sprite'); // объединение svg картинок в 1 файл
 const include = require('gulp-include'); // подключение html к html
-const typograf = require('gulp-typograf'); //расставляет неразрывные пробелы в нужных местах
-const fs = require('fs');
-const sourcemaps = require('gulp-sourcemaps');
+const typograf = require('gulp-typograf'); // расставляет неразрывные пробелы в нужных местах
+const fs = require('fs'); // проверка на существование файла
+const sourcemaps = require('gulp-sourcemaps'); // упрощает отладку, показывает в DevTools исходный путь
 
 function resources() {
     return src('app/upload/**/*')
@@ -91,10 +91,22 @@ function styles() {
 }
 
 function watching() {
+    const path = require('path');
+
     browserSync.init({
         server: {
-            baseDir: 'app/'
-        }
+            baseDir: 'app/',
+            middleware: function (req, res, next) {
+                const filePath = path.join(__dirname, 'app', req.url === '/' ? 'index.html' : req.url);
+
+                if (!fs.existsSync(filePath)) {
+                    req.url = '/404.html';
+                }
+
+                return next();
+            }
+        },
+        ghostMode: false // false - отключена синхронизация между окнами, true - включена (клики, скролл, формы)
     });
     watch(['app/scss/**/*.scss'], styles)
     watch(['app/images/src/**/*.*'], images)
@@ -126,7 +138,8 @@ function building() {
         // 'app/images/sprite.svg',
         'app/js/main.min.js',
         'app/*.html',
-        'app/upload/**/*'
+        'app/upload/**/*',
+        'app/web.config',
     ], { base: 'app' })
         .pipe(dest('dist'))
 }
