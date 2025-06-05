@@ -15,6 +15,7 @@
         "gulp-avif": "^1.1.1",
         "gulp-clean": "^0.4.0",
         "gulp-concat": "^2.6.1",
+        "gulp-fs": "^0.0.2",
         "gulp-imagemin": "^7.1.0",
         "gulp-include": "^2.4.1",
         "gulp-newer": "^1.4.0",
@@ -28,7 +29,6 @@
         "jquery-ui": "^1.14.0",
         "normalize.css": "^8.0.1",
         "sass": "^1.77.8",
-        "swiper": "^11.1.10",
-        "gulp-fs": "^0.0.2"
+        "swiper": "^11.1.10"
     }
 }
