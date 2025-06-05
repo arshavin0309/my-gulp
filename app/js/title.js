@@ -15,11 +15,6 @@ if (!document.title) {
             document.title = title;
             break;
 
-        case '/404.html':
-            title = lang == 'ru' ? 'Страница не найдена?' : 'Page not found';
-            document.title = title;
-            break;
-
         case '/terms.html':
         case '/terms-of-trade.html':
             title = lang == 'ru' ? 'Условия торговли' : 'Trading terms';
@@ -134,7 +129,7 @@ if (!document.title) {
             break;
 
         default:
-            document.title = 'Нужно установить title';
+            document.title = '';
             break;
     }
 }
