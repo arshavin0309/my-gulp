@@ -100,17 +100,7 @@ function watching() {
                 const filePath = path.join(__dirname, 'app', req.url === '/' ? 'index.html' : req.url);
 
                 if (!fs.existsSync(filePath)) {
-                    const notFoundPath = path.join(__dirname, 'app', '404.html');
-                    if (fs.existsSync(notFoundPath)) {
-                        let html = fs.readFileSync(notFoundPath, 'utf8');
-                        
-                        // Вставим кастомный <title> для 404
-                        html = html.replace(/<title>(.*?)<\/title>/i, '<title>Страница не найдена - 404</title>');
-
-                        res.writeHead(404, { 'Content-Type': 'text/html' });
-                        res.end(html);
-                        return;
-                    }
+                    req.url = '/404.html';
                 }
 
                 return next();
@@ -118,7 +108,7 @@ function watching() {
         },
         ghostMode: false
     });
-    
+
     watch(['app/scss/**/*.scss'], styles)
     watch(['app/images/src/**/*.*'], images)
     watch(['app/js/**/*.js', '!app/js/main.min.js',], scripts)
