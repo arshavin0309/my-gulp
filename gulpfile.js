@@ -10,7 +10,6 @@ const avif = require('gulp-avif'); // конвертер в avif
 const webp = require('gulp-webp'); // конвертер в webp
 const imagemin = require('gulp-imagemin'); // сжимание картинок
 const newer = require('gulp-newer'); // кэш
-const svgSprite = require('gulp-svg-sprite'); // объединение svg картинок в 1 файл
 const include = require('gulp-include'); // подключение html к html
 const typograf = require('gulp-typograf'); // расставляет неразрывные пробелы в нужных местах
 const fs = require('fs'); // проверка на существование файла
@@ -51,19 +50,6 @@ function images() {
 
         .pipe(dest('app/images/'))
         .pipe(browserSync.stream())
-}
-
-function sprite() {
-    return src('app/images/src/*.svg')
-        .pipe(svgSprite({
-            mode: {
-                stack: {
-                    sprite: '../sprite.svg',
-                    example: true
-                }
-            }
-        }))
-        .pipe(dest('app/images/'))
 }
 
 function scripts() {
@@ -135,17 +121,13 @@ function cleanDist() {
 
 function building() {
     return src([
-        // 'app/css/style.min.css',
         'app/css/**/*.css',
         '!app/images/**/*.html',
         'app/images/*.*',
-        // '!app/images/*.svg',
-        // 'app/images/sprite.svg',
         'app/js/main.min.js',
         'app/*.html',
         'app/upload/**/*',
         'app/web.config',
-        'app/favicon.png',
     ], { base: 'app' })
         .pipe(dest('dist'))
 }
@@ -154,7 +136,6 @@ exports.styles = styles;
 exports.images = images;
 exports.pages = pages;
 exports.building = building;
-exports.sprite = sprite;
 exports.scripts = scripts;
 exports.watching = watching;
 
