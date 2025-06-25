@@ -1,80 +1,98 @@
 // мобильное меню
 
-let menuItem = $('.header .menu > .menu-item');
-let subMenu = $('.header .menu > .menu-item .sub-menu');
-let burger = $('.header__burger'); // кнопка открытия мобильного меню
-let headerMenu = $('.header .menu'); // меню хедера
-let headerBox = $('.header'); // блок внутри контейнера хедера, например если он в виде острова и при выпадении мобильного меню, нужно его дополнительно стилизовать
+$(function () {
+    const menuItems = $('.header .menu > .menu-item');
+    const subMenus = $('.header .menu > .menu-item > .sub-menu');
+    const burger = $('.header__burger');
+    const headerMenu = $('.header__content');
+    const headerBox = $('.header');
+    const upButton = $('.upButton');
 
-menuItem.removeClass('active');
-subMenu.removeClass('active').slideUp();
-burger.removeClass('active');
-headerMenu.removeClass('active');
-headerBox.removeClass('active');
+    let isEnabled = false;
 
-navMenu();
+    function closeAllSubMenus() {
+        menuItems.removeClass('active');
+        subMenus.removeClass('active').slideUp();
+    }
 
-function navMenu() {
-    if ($(window).width() <= 1200) {
+    function toggleMobileMenu() {
+        burger.toggleClass('active');
+        headerBox.toggleClass('active');
+        headerMenu.toggleClass('active');
 
-        burger.on('click', function () {
-            console.log('click on burger');
-            burger.toggleClass('active');
-            headerBox.toggleClass('active');
-            headerMenu.toggleClass('active');
+        if (!burger.hasClass('active')) {
+            closeAllSubMenus();
+        }
+    }
 
-            subMenu.removeClass('active').slideUp();
-            menuItem.removeClass('active');
-        })
+    function bindHandlers() {
+        burger.on('click.mobileMenu', function () {
+            toggleMobileMenu();
+        });
 
-        $('.upButton').on('click', function () {
+        upButton.on('click.mobileMenu', function () {
             burger.removeClass('active');
             headerBox.removeClass('active');
             headerMenu.removeClass('active');
-
-            subMenu.removeClass('active').slideUp();
-            menuItem.removeClass('active');
+            closeAllSubMenus();
         });
 
-        for (let click = 0; click < menuItem.length; click++) {
-            menuItem.eq(click).on('click', function () {
-                if (menuItem.eq(click).hasClass('active')) {
-                    menuItem.eq(click).removeClass('active');
-                    subMenu.eq(click).removeClass('active').slideUp();
+        menuItems.on('click.mobileMenu', '> a', function (e) {
+            const $parentItem = $(this).parent();
+
+            // Если есть подменю — отменяем переход и переключаем меню
+            if ($parentItem.children('.sub-menu').length) {
+                e.preventDefault();
+
+                const $submenu = $parentItem.children('.sub-menu');
+
+                if ($submenu.is(':visible')) {
+                    $submenu.removeClass('active').slideUp();
+                    $parentItem.removeClass('active');
                 } else {
-                    for (let other = 0; other < menuItem.length; other++) {
-                        if (menuItem.eq(other) != menuItem.eq(click)) {
-                            subMenu.eq(other).removeClass('active').slideUp();
-                            menuItem.removeClass('active');
-                        }
-                    }
-
-                    subMenu.eq(click).addClass('active').slideDown();
-                    menuItem.eq(click).addClass('active');
+                    closeAllSubMenus();
+                    $submenu.addClass('active').slideDown();
+                    $parentItem.addClass('active');
                 }
-            })
-        }
-    } else {
-        for (let hover = 0; hover < menuItem.length; hover++) {
-            menuItem.eq(hover).on('mouseenter', function () {
+            }
+            // Иначе — переход по ссылке происходит как обычно
+        });
 
-                if (!menuItem.eq(hover).hasClass('active')) {
-                    for (let other = 0; other < menuItem.length; other++) {
-                        if (menuItem.eq(other) != menuItem.eq(hover)) {
-                            subMenu.eq(other).removeClass('active').slideUp();
-                            menuItem.eq(other).removeClass('active');
-                        }
-                    }
+        isEnabled = true;
+    }
 
-                    subMenu.eq(hover).addClass('active').slideDown();
-                    menuItem.eq(hover).addClass('active');
-                }
-            })
+    function unbindHandlers() {
+        burger.off('.mobileMenu');
+        upButton.off('.mobileMenu');
+        menuItems.off('.mobileMenu');
 
-            subMenu.eq(hover).on('mouseleave', function () {
-                subMenu.eq(hover).removeClass('active').slideUp();
-                menuItem.eq(hover).removeClass('active');
-            })
+        burger.removeClass('active');
+        headerBox.removeClass('active');
+        headerMenu.removeClass('active');
+        subMenus.removeAttr('style').removeClass('active');
+        menuItems.removeClass('active');
+
+        isEnabled = false;
+    }
+
+    function checkWidth() {
+        if ($(window).width() <= 1200) {
+            if (!isEnabled) {
+                closeAllSubMenus();
+                bindHandlers();
+            }
+        } else {
+            if (isEnabled) {
+                unbindHandlers();
+            }
         }
     }
-}
+
+    checkWidth();
+
+    let resizeTimeout;
+    $(window).on('resize', function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(checkWidth, 150);
+    });
+});
