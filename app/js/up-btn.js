@@ -1,24 +1,21 @@
 // кнопка наверх
 
-$(window).on('scroll', trackScroll);
-$('.upButton').on('click', backToTop);
+$(function () {
+    const $btn = $('.upButton');
+    const $header = $('.header');
 
-function trackScroll() {
-    let scrolled = window.pageYOffset;
+    function trackScroll() {
+        const scrolled = window.pageYOffset;
+        const show = scrolled > 100;
 
-    if (scrolled > 100) {
-        $('.upButton').addClass('show');
-        $('.header').addClass('scrolled');
+        $btn.toggleClass('show', show);
+        $header.toggleClass('scrolled', show);
     }
-    if (scrolled < 100) {
-        $('.upButton').removeClass('show');
-        $('.header').removeClass('scrolled');
-    }
-}
 
-function backToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    $(window).on('scroll', trackScroll);
+    trackScroll(); // Проверка при загрузке
+
+    $btn.on('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-};
+});
