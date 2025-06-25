@@ -10,10 +10,50 @@ const avif = require('gulp-avif'); // конвертер в avif
 const webp = require('gulp-webp'); // конвертер в webp
 const imagemin = require('gulp-imagemin'); // сжимание картинок
 const newer = require('gulp-newer'); // кэш
-const include = require('gulp-include'); // подключение html к html
+const fileInclude = require('gulp-file-include'); // подключение html к html
 const typograf = require('gulp-typograf'); // расставляет неразрывные пробелы в нужных местах
 const fs = require('fs'); // проверка на существование файла
 const sourcemaps = require('gulp-sourcemaps'); // упрощает отладку, показывает в DevTools исходный путь
+const svgmin = require('gulp-svgmin'); // сжатие и минификация svg картинок
+const path = require('path');
+
+function fonts() {
+    const fontFolder = 'app/fonts';
+    const destFolder = 'dist/fonts';
+
+    if (!fs.existsSync(fontFolder)) {
+        const { Readable } = require('stream');
+        return new Readable({ read() { this.push(null); } });
+    }
+
+    const fontFiles = fs.readdirSync(fontFolder).filter(file => !file.startsWith('.'));
+
+    if (fontFiles.length === 0) {
+        const { Readable } = require('stream');
+        return new Readable({ read() { this.push(null); } });
+    }
+
+    return src(`${fontFolder}/**/*`)
+        .pipe(newer(destFolder))
+        .pipe(dest(destFolder));
+}
+
+function svgIcons() {
+    return src('app/images/src/**/*.svg')
+        .pipe(svgmin({
+            plugins: [
+                {
+                    name: 'removeViewBox',
+                    active: false, // оставляем viewBox
+                },
+                {
+                    name: 'cleanupIDs',
+                    active: false, // не трогаем id, если они используются в CSS
+                }
+            ]
+        }))
+        .pipe(dest('app/images')); // или 'dist/icons'
+}
 
 function resources() {
     return src('app/upload/**/*')
@@ -22,8 +62,9 @@ function resources() {
 
 function pages() {
     return src('app/pages/*.html')
-        .pipe(include({
-            includePaths: 'app/components'
+        .pipe(fileInclude({
+            prefix: '@@',
+            basepath: '@file'
         }))
         .pipe(typograf({
             locale: ['ru', 'en-US'],
@@ -40,11 +81,11 @@ function images() {
         .pipe(newer('app/images/'))
         .pipe(avif({ quality: 90 }))
 
-        .pipe(src('app/images/src/*.*'))
+        .pipe(src(['app/images/src/*.*', '!app/images/src/*.svg']))
         .pipe(newer('app/images/'))
         .pipe(webp())
-        
-        .pipe(src('app/images/src/*.*'))
+
+        .pipe(src(['app/images/src/*.*', '!app/images/src/*.svg']))
         .pipe(newer('app/images/'))
         .pipe(imagemin())
 
@@ -72,30 +113,40 @@ function scripts() {
 function styles() {
     return src('app/scss/style.scss')
         .pipe(sourcemaps.init())
-        .pipe(scss({ outputStyle: 'compressed' }))
+        .pipe(scss({ outputStyle: 'compressed' }).on('error', scss.logError))
         .pipe(autoprefixer({ overrideBrowserslist: ['last 10 version'] }))
         .pipe(concat('style.min.css'))
-        .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write())
         .pipe(dest('app/css'))
         .pipe(browserSync.stream())
 }
 
 function watching() {
-    const path = require('path');
-
     browserSync.init({
         server: {
             baseDir: 'app/',
             middleware: function (req, res, next) {
+                // Расширения файлов, которые считаются ассетами (не HTML)
+                const ignored = ['.css', '.js', '.map', '.png', '.jpg', '.jpeg', '.svg', '.webp', '.avif'];
+
+                // Если URL запроса содержит одно из расширений ассетов — пропускаем без проверки наличия файла
+                if (ignored.some(ext => req.url.includes(ext))) {
+                    return next(); // Не перехватываем запросы к стилям, скриптам и изображениям
+                }
+
+                // Определяем путь к файлу в файловой системе
                 const filePath = path.join(__dirname, 'app', req.url === '/' ? 'index.html' : req.url);
 
+                // Если запрашиваемый файл не существует — заменяем путь на кастомную страницу 404
                 if (!fs.existsSync(filePath)) {
                     req.url = '/404.html';
                 }
 
+                // Продолжаем обработку запроса
                 return next();
             }
         },
+        // Отключаем синхронизацию действий (клики, скролл и т.п.) между вкладками/устройствами
         ghostMode: false
     });
 
@@ -134,10 +185,12 @@ function building() {
 
 exports.styles = styles;
 exports.images = images;
+exports.svgIcons = svgIcons;
 exports.pages = pages;
 exports.building = building;
 exports.scripts = scripts;
+exports.fonts = fonts;
 exports.watching = watching;
 
-exports.build = series(cleanDist, building);
-exports.default = series(styles, images, scripts, pages, watching);
+exports.build = series(cleanDist, building, fonts);
+exports.default = series(styles, images, svgIcons, scripts, pages, watching);
