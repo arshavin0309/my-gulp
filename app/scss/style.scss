@@ -7,6 +7,10 @@
     --white: #fff;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,7 +18,7 @@
     font-family: 'Manrope', sans-serif;
 
     scrollbar-width: thin;
-    scrollbar-color: var(--black) var(--white);
+    scrollbar-color: red var(--white);
 
     &::-webkit-scrollbar {
         height: 12px;
@@ -26,7 +30,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: var(--black);
+        background-color: red;
         border-radius: 5px;
         border: 3px solid var(--white);
     }
@@ -37,13 +41,14 @@
     position: fixed;
     width: 40px;
     height: 40px;
+    padding: 10px;
     bottom: 20px;
     right: 15px;
     cursor: pointer;
     transition: all .2s ease-in-out;
     transform: scale(0);
     pointer-events: none;
-    background: var(--yellow) url(../images/up-btn-black.svg) center / 20px no-repeat;
+    background: red;
     border-radius: 50%;
     box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
 
