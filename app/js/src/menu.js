@@ -4,9 +4,10 @@ $(function () {
     const menuItems = $('.header .menu > .menu-item');
     const subMenus = $('.header .menu > .menu-item > .sub-menu');
     const burger = $('.header__burger');
-    const headerMenu = $('.header__content');
+    const headerMenu = $('.header .menu');
     const headerBox = $('.header');
     const upButton = $('.upButton');
+    const firstLineLink = $('.header .menu > .menu-item > a');
 
     let isEnabled = false;
 
@@ -38,10 +39,12 @@ $(function () {
         });
 
         menuItems.on('click.mobileMenu', '> a', function (e) {
-            const $parentItem = $(this).parent();
+            const $link = $(this);
+            const $parentItem = $link.parent();
+            const href = $link.attr('href');
 
-            // Если есть подменю — отменяем переход и переключаем меню
-            if ($parentItem.children('.sub-menu').length) {
+            if (href === '##') {
+                // Обрабатываем как подменю
                 e.preventDefault();
 
                 const $submenu = $parentItem.children('.sub-menu');
@@ -54,8 +57,14 @@ $(function () {
                     $submenu.addClass('active').slideDown();
                     $parentItem.addClass('active');
                 }
+            } else {
+                // Это якорь или обычная ссылка — закрываем меню
+                // (даём событию отработать, не отменяем e.preventDefault())
+                burger.removeClass('active');
+                headerBox.removeClass('active');
+                headerMenu.removeClass('active');
+                closeAllSubMenus();
             }
-            // Иначе — переход по ссылке происходит как обычно
         });
 
         isEnabled = true;
