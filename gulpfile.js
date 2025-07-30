@@ -95,11 +95,14 @@ function scripts() {
 }
 
 function styles() {
+    const timestamp = Date.now();
+
     return src('app/scss/style.scss')
         .pipe(sourcemaps.init())
         .pipe(scss({ outputStyle: 'compressed' }).on('error', scss.logError))
         .pipe(autoprefixer({ cascade: false }))
         .pipe(concat('style.min.css'))
+        .pipe(replace(/(\.png|\.jpg|\.jpeg|\.webp|\.avif|\.svg)(\?v=\d+)?/g, `$1?v=${timestamp}`))
         .pipe(sourcemaps.write())
         .pipe(dest('app/css'))
         .pipe(browserSync.stream())
@@ -169,6 +172,7 @@ function building() {
     ], { base: 'app' })
         .pipe(replace(/style\.min\.css(\?v=\d+)?/, `style.min.css?v=${timestamp}`))
         .pipe(replace(/main\.min\.js(\?v=\d+)?/, `main.min.js?v=${timestamp}`))
+        .pipe(replace(/(\.png|\.jpg|\.jpeg|\.webp|\.avif|\.svg)(\?v=\d+)?/g, `$1?v=${timestamp}`))
         .pipe(dest('dist'))
 }
 
