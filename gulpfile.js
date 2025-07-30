@@ -14,6 +14,7 @@ const fs = require('fs'); // проверка на существование ф
 const sourcemaps = require('gulp-sourcemaps'); // упрощает отладку, показывает в DevTools исходный путь
 const svgmin = require('gulp-svgmin'); // сжатие и минификация svg картинок
 const path = require('path');
+const replace = require('gulp-replace'); // добавление хэша при подключении стилей и скриптов
 
 function fonts() {
     const fontFolder = 'app/fonts';
@@ -155,6 +156,8 @@ function cleanDist() {
 }
 
 function building() {
+    const timestamp = Date.now();
+
     return src([
         'app/css/**/*.css',
         '!app/images/**/*.html',
@@ -164,6 +167,8 @@ function building() {
         'app/upload/**/*',
         'app/web.config',
     ], { base: 'app' })
+        .pipe(replace(/style\.min\.css(\?v=\d+)?/, `style.min.css?v=${timestamp}`))
+        .pipe(replace(/main\.min\.js(\?v=\d+)?/, `main.min.js?v=${timestamp}`))
         .pipe(dest('dist'))
 }
 
