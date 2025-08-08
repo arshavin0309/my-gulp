@@ -5,9 +5,13 @@
 :root {
     --black: #000;
     --white: #fff;
+    --transition: .3s ease-in-out all;
 }
 
-html, body {
+html,
+body {
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
@@ -16,9 +20,18 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Manrope', sans-serif;
+    transition: var(--transition);
 
     scrollbar-width: thin;
-    scrollbar-color: red var(--white);
+    scrollbar-color: red var(--white); // 1й цвет бугунка скролла, 2й фоновый цвет скролла
+
+    &::before {
+        transition: var(--transition);
+    }
+
+    &::after {
+        transition: var(--transition);
+    }
 
     &::-webkit-scrollbar {
         height: 12px;
@@ -26,13 +39,13 @@ html, body {
     }
 
     &::-webkit-scrollbar-track {
-        background: var(--white);
+        background: var(--white); // фоновый цвет скролла
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: red;
+        background-color: red; // цвет бегунка скролла
         border-radius: 5px;
-        border: 3px solid var(--white);
+        border: 3px solid var(--white); // фоновый цвет скролла
     }
 }
 
@@ -88,6 +101,44 @@ html, body {
         padding: 10px 30px;
         font-size: 14px;
     }
+}
+
+.header {
+    z-index: 1000;
+
+    &__burger {
+        display: block;
+        cursor: pointer;
+
+        .burger-line {
+            transform-origin: center;
+        }
+
+        &.active {
+            .top {
+                transform: translate(-3px, 4px) rotate(45deg);
+            }
+
+            .middle {
+                opacity: 0;
+            }
+
+            .bottom {
+                transform: translate(-3px, -3px) rotate(-45deg);
+            }
+
+            path {
+                fill: var(--white);
+            }
+        }
+    }
+}
+
+.container {
+    max-width: calc(1128px + 30px + 30px); // ширина самого контейнера + боковые паддинги
+    margin: auto;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 @import '../scss/hovers';
