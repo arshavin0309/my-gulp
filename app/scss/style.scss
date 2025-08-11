@@ -145,6 +145,10 @@ img {
     max-width: 100%;
 }
 
+address {
+    font-style: initial;
+}
+
 @import '../scss/hovers';
 @import '../scss/1800';
 @import '../scss/1700';
