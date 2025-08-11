@@ -141,6 +141,10 @@ body {
     padding-right: 30px;
 }
 
+img {
+    max-width: 100%;
+}
+
 @import '../scss/hovers';
 @import '../scss/1800';
 @import '../scss/1700';
