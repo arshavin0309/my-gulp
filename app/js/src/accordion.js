@@ -1,4 +1,4 @@
-// новая версия аккордеона
+// !!!!!!!!!!!!переписать без jquery, jquery удален из сборки!!!!!!
 
 $(document).ready(function () {
     $('.partner-tags__list > li').click(function (e) {

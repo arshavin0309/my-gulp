@@ -1,91 +1,130 @@
 // мобильное меню
-
-$(function () {
-    const menuItems = $('.header .menu > .menu-item');
-    const subMenus = $('.header .menu > .menu-item > .sub-menu');
-    const burger = $('.header__burger');
-    const headerMenu = $('.header .menu');
-    const headerBox = $('.header');
-    const upButton = $('.upButton');
-    const firstLineLink = $('.header .menu > .menu-item > a');
+document.addEventListener("DOMContentLoaded", () => {
+    const menuItems = document.querySelectorAll(".header .menu > .menu-item");
+    const subMenus = document.querySelectorAll(".header .menu > .menu-item > .sub-menu");
+    const burger = document.querySelector(".header__burger");
+    const headerMenu = document.querySelector(".header .menu");
+    const headerBox = document.querySelector(".header");
+    const upButton = document.querySelector(".upButton");
 
     let isEnabled = false;
+    let resizeTimeout;
+
+    // простая slideUp/slideDown реализация
+    function slideUp(element) {
+        element.style.height = element.scrollHeight + "px"; // стартовая высота
+        requestAnimationFrame(() => {
+            element.style.transition = "height 0.3s ease";
+            element.style.height = "0";
+        });
+        element.classList.remove("active");
+        element.addEventListener("transitionend", function handler() {
+            element.style.display = "none";
+            element.style.removeProperty("height");
+            element.style.removeProperty("transition");
+            element.removeEventListener("transitionend", handler);
+        });
+    }
+
+    function slideDown(element) {
+        element.style.display = "block";
+        element.style.height = "0";
+        element.style.transition = "height 0.3s ease";
+        requestAnimationFrame(() => {
+            element.style.height = element.scrollHeight + "px";
+        });
+        element.classList.add("active");
+        element.addEventListener("transitionend", function handler() {
+            element.style.removeProperty("height");
+            element.style.removeProperty("transition");
+            element.removeEventListener("transitionend", handler);
+        });
+    }
 
     function closeAllSubMenus() {
-        menuItems.removeClass('active');
-        subMenus.removeClass('active').slideUp();
+        menuItems.forEach(item => item.classList.remove("active"));
+        subMenus.forEach(sub => {
+            if (sub.style.display !== "none") {
+                slideUp(sub);
+            } else {
+                sub.classList.remove("active");
+                sub.style.removeProperty("display");
+            }
+        });
     }
 
     function toggleMobileMenu() {
-        burger.toggleClass('active');
-        headerBox.toggleClass('active');
-        headerMenu.toggleClass('active');
+        burger.classList.toggle("active");
+        headerBox.classList.toggle("active");
+        headerMenu.classList.toggle("active");
 
-        if (!burger.hasClass('active')) {
+        if (!burger.classList.contains("active")) {
             closeAllSubMenus();
         }
     }
 
     function bindHandlers() {
-        burger.on('click.mobileMenu', function () {
-            toggleMobileMenu();
-        });
+        burger.addEventListener("click", toggleMobileMenu);
 
-        upButton.on('click.mobileMenu', function () {
-            burger.removeClass('active');
-            headerBox.removeClass('active');
-            headerMenu.removeClass('active');
+        upButton.addEventListener("click", () => {
+            burger.classList.remove("active");
+            headerBox.classList.remove("active");
+            headerMenu.classList.remove("active");
             closeAllSubMenus();
         });
 
-        menuItems.on('click.mobileMenu', '> a', function (e) {
-            const $link = $(this);
-            const $parentItem = $link.parent();
-            const href = $link.attr('href');
+        menuItems.forEach(item => {
+            const link = item.querySelector(":scope > a");
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("href");
 
-            if (href === '##') {
-                // Обрабатываем как подменю
-                e.preventDefault();
+                if (href === "##") {
+                    e.preventDefault();
+                    const submenu = item.querySelector(":scope > .sub-menu");
 
-                const $submenu = $parentItem.children('.sub-menu');
-
-                if ($submenu.is(':visible')) {
-                    $submenu.removeClass('active').slideUp();
-                    $parentItem.removeClass('active');
+                    if (submenu.classList.contains("active")) {
+                        slideUp(submenu);
+                        item.classList.remove("active");
+                    } else {
+                        closeAllSubMenus();
+                        slideDown(submenu);
+                        item.classList.add("active");
+                    }
                 } else {
+                    burger.classList.remove("active");
+                    headerBox.classList.remove("active");
+                    headerMenu.classList.remove("active");
                     closeAllSubMenus();
-                    $submenu.addClass('active').slideDown();
-                    $parentItem.addClass('active');
                 }
-            } else {
-                // Это якорь или обычная ссылка — закрываем меню
-                // (даём событию отработать, не отменяем e.preventDefault())
-                burger.removeClass('active');
-                headerBox.removeClass('active');
-                headerMenu.removeClass('active');
-                closeAllSubMenus();
-            }
+            });
         });
 
         isEnabled = true;
     }
 
     function unbindHandlers() {
-        burger.off('.mobileMenu');
-        upButton.off('.mobileMenu');
-        menuItems.off('.mobileMenu');
+        burger.replaceWith(burger.cloneNode(true));
+        upButton.replaceWith(upButton.cloneNode(true));
+        menuItems.forEach(item => {
+            const link = item.querySelector(":scope > a");
+            link.replaceWith(link.cloneNode(true));
+        });
 
-        burger.removeClass('active');
-        headerBox.removeClass('active');
-        headerMenu.removeClass('active');
-        subMenus.removeAttr('style').removeClass('active');
-        menuItems.removeClass('active');
+        burger.classList.remove("active");
+        headerBox.classList.remove("active");
+        headerMenu.classList.remove("active");
+
+        subMenus.forEach(sub => {
+            sub.style.removeProperty("display");
+            sub.classList.remove("active");
+        });
+        menuItems.forEach(item => item.classList.remove("active"));
 
         isEnabled = false;
     }
 
     function checkWidth() {
-        if ($(window).width() <= 1200) {
+        if (window.innerWidth <= 1200) {
             if (!isEnabled) {
                 closeAllSubMenus();
                 bindHandlers();
@@ -99,8 +138,7 @@ $(function () {
 
     checkWidth();
 
-    let resizeTimeout;
-    $(window).on('resize', function () {
+    window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(checkWidth, 150);
     });
