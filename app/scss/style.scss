@@ -8,6 +8,10 @@
     --transition: .3s ease-in-out all;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 body {
     margin: 0;
