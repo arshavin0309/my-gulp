@@ -39,7 +39,7 @@ if (!getCookie('cookies')) {
     document.querySelector('.cookies').style = 'display: flex'
 }
 
-document.querySelector('.cookies .green-btn').addEventListener('click', () => {
+document.querySelector('.cookies .btn').addEventListener('click', () => {
     document.querySelector('.cookies').style = 'display: none'
     setCookie('cookies', 'true', { 'max-age': 3600 * 24 * 365 })
 })
