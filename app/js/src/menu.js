@@ -14,6 +14,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function handleChange(e) {
+        // при клике на Esc
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                // Закрываем меню
+                if (header) header.classList.remove("active");
+                if (burger) burger.classList.remove("active");
+                if (headerBox) headerBox.classList.remove("active");
+
+                // Закрываем все подменю
+                if (subMenus.length > 0) {
+                    subMenus.forEach(subMenu => {
+                        subMenu.classList.remove('active');
+
+                        if (e.matches) {
+                            subMenu.style.maxHeight = "0px";
+                        } else {
+                            subMenu.style.maxHeight = "";
+                        }
+                    });
+                }
+            }
+        });
+
         if (e.matches) {
             // экран <= 1200
             if (subMenus.length > 0) {
@@ -26,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (burger.classList.contains('active')) {
                     // Закрыли меню
                     if (header) header.classList.remove("active");
-                    burger.classList.remove("active");
+                    if (burger) burger.classList.remove("active");
                     if (headerBox) headerBox.classList.remove("active");
 
                     if (subMenus.length > 0) {
@@ -38,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     // Активировали меню
                     if (header) header.classList.add("active");
-                    burger.classList.add("active");
+                    if (burger) burger.classList.add("active");
                     if (headerBox) headerBox.classList.add("active");
                 }
             };
@@ -46,6 +69,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (menuItems.length > 0) {
                 menuItems.forEach(menuItem => {
                     menuItem.onclick = () => {
+                        const link = menuItem.querySelector("a");
+
+                        // Считаем количество решеток в ссылке
+                        const hashCount = (link.href.match(/#/g) || []).length;
+
+                        // Если решетка одна, то это точно якорь
+                        if (hashCount === 1) {
+                            if (header) header.classList.remove("active");
+                            if (burger) burger.classList.remove("active");
+                            if (headerBox) headerBox.classList.remove("active");
+                        }
+
                         const subMenu = menuItem.querySelector(".sub-menu");
 
                         // Проверяем существует ли subMenu
