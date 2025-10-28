@@ -136,6 +136,18 @@ body {
             }
         }
     }
+
+    .menu {
+        &>.menu-item {
+            list-style: none;
+
+            &>.sub-menu {
+                &>.menu-item {
+                    list-style: none;
+                }
+            }
+        }
+    }
 }
 
 .container {
@@ -151,6 +163,20 @@ img {
 
 address {
     font-style: initial;
+}
+
+.footer {
+    .menu {
+        &>.menu-item {
+            list-style: none;
+
+            &>.sub-menu {
+                &>.menu-item {
+                    list-style: none;
+                }
+            }
+        }
+    }
 }
 
 @import '../scss/hovers';
