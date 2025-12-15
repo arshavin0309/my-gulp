@@ -80,6 +80,8 @@ function images() {
 
 function scripts() {
     return src([
+        'node_modules/gsap/dist/gsap.min.js',
+        'node_modules/gsap/dist/ScrollTrigger.min.js',
         'node_modules/swiper/swiper-bundle.js',
         'app/js/src/**/*.js',
     ])
