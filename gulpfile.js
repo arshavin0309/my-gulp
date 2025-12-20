@@ -165,7 +165,7 @@ function building() {
         'app/css/**/*.css',
         '!app/images/**/*.html',
         'app/images/*.*',
-        'app/js/main.min.js',
+        // 'app/js/main.min.js',
         'app/*.html',
         'app/upload/**/*',
         'app/web.config',
@@ -174,6 +174,9 @@ function building() {
         .pipe(replace(/main\.min\.js(\?v=\d+)?/, `main.min.js?v=${timestamp}`))
         .pipe(replace(/(\.png|\.jpg|\.jpeg|\.webp|\.avif|\.svg)(\?v=\d+)?/g, `$1?v=${timestamp}`))
         .pipe(dest('dist'))
+
+        && src('app/js/main.min.js', { base: 'app' })
+            .pipe(dest('dist'));
 }
 
 exports.styles = styles;
