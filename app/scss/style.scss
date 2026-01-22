@@ -180,22 +180,7 @@ address {
     }
 }
 
-.wpcf7-list-item {
-    display: block !important;
-    margin: 0 !important;
-}
-
-.wpcf7-not-valid-tip {
-    margin: -10px 0 20px !important;
-}
-
-.wpcf7-response-output {
-    margin: 20px 0 0 !important;
-    padding: 15px !important;
-    color: var(--black-text) !important;
-    border-radius: 10px !important;
-}
-
+@import '../scss/wordpress';
 @import '../scss/hovers';
 @import '../scss/1800';
 @import '../scss/1700';
