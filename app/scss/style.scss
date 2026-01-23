@@ -117,6 +117,7 @@ textarea {
 
     &__burger {
         display: block;
+        flex: 0 0 auto;
         cursor: pointer;
 
         .burger-line {
