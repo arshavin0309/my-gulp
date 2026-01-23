@@ -54,6 +54,10 @@ button {
     cursor: pointer;
 }
 
+textarea {
+    resize: none;
+}
+
 .upButton {
     z-index: 1000;
     position: fixed;
