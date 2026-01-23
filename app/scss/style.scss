@@ -123,6 +123,15 @@ textarea {
             transform-origin: center;
         }
 
+        .top,
+        .bottom {
+            transition: .3s ease-in-out transform;
+        }
+
+        .middle {
+            transition: .3s ease-in-out opacity;
+        }
+
         &.active {
             .top {
                 transform: translate(-3px, 4px) rotate(45deg);
