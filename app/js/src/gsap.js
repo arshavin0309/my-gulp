@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 3️⃣ Параграфы и списки
-        tl.from(section.querySelectorAll("p, ul, ol"), {
+        tl.from(section.querySelectorAll("div, p, ul, ol"), {
             x: 0,
             opacity: 0,
             duration: 0.6,
