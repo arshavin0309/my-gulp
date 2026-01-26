@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const burger = document.querySelector(".header__burger");
     const menuItems = document.querySelectorAll(".header .menu > .menu-item");
     const subMenus = document.querySelectorAll(".header .menu > .menu-item > .sub-menu");
-    const headerBox = document.querySelector(".header__content");
+    const headerBox = document.querySelector(".header__menu");
     const mediaQuery = window.matchMedia("(max-width: 1200px)");
 
     if (subMenus.length > 0) {
@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (subMenus.length > 0) {
                     subMenus.forEach(subMenu => {
                         subMenu.classList.remove('active');
+                        subMenu.closest('.menu-item')?.classList.remove('active');
 
                         if (e.matches) {
                             subMenu.style.maxHeight = "0px";
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         subMenus.forEach(subMenu => {
                             subMenu.style.maxHeight = "0px";
                             subMenu.classList.remove('active');
+                            subMenu.closest('.menu-item')?.classList.remove('active');
                         })
                     }
                 } else {
@@ -93,11 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (otherSubMenu && otherItem !== menuItem) {
                                 otherSubMenu.classList.remove('active');
                                 otherSubMenu.style.maxHeight = "0px";
+                                otherItem.classList.remove('active');
                             }
                         });
 
                         // Переключаем текущее подменю
                         subMenu.classList.toggle('active');
+                        menuItem.classList.toggle('active');
 
                         if (subMenu.classList.contains('active')) {
                             subMenu.style.maxHeight = subMenu.scrollHeight + "px";
@@ -117,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (subMenus.length > 0) {
                 subMenus.forEach(subMenu => {
                     subMenu.style.maxHeight = "";
+                    subMenu.classList.remove('active');
+                    subMenu.closest('.menu-item')?.classList.remove('active');
                 })
             }
         }
