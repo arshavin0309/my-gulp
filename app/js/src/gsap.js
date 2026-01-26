@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                // start: "top 80%",
                 start: "top bottom",
                 once: true,
                 fastScrollEnd: true
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.from(section, {
             opacity: 0,
             x: 0,
-            // duration: 0.4,
             duration: 0.25,
             ease: "power2.out"
         });
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.from(section.querySelectorAll("h1, h2, h3, h4, h5, h6"), {
             y: 30,
             opacity: 0,
-            // duration: 0.6,
             duration: 0.25,
             ease: "power2.out",
             stagger: 0.1
@@ -35,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tl.from(section.querySelectorAll("p, ul, ol"), {
             x: 0,
             opacity: 0,
-            // duration: 0.6,
             duration: 0.25,
             ease: "power2.out",
             stagger: 0.05
