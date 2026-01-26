@@ -7,14 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrolled = window.scrollY;
         const show = scrolled > 100;
 
-        if(btn) btn.classList.toggle('show', show);
-        if(header) header.classList.toggle('scrolled', show);
+        if (btn) btn.classList.toggle('show', show);
+        if (header) header.classList.toggle('scrolled', show);
     }
 
     window.addEventListener('scroll', trackScroll);
     trackScroll(); // Проверка при загрузке
-
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    if (btn) btn.addEventListener('click', scrollToTop);
 });
