@@ -152,9 +152,17 @@ textarea {
         &>.menu-item {
             list-style: none;
 
+            &>a {
+                text-decoration: none;
+            }
+
             &>.sub-menu {
                 &>.menu-item {
                     list-style: none;
+
+                    &>a {
+                        text-decoration: none;
+                    }
                 }
             }
         }
@@ -181,9 +189,17 @@ address {
         &>.menu-item {
             list-style: none;
 
+            &>a {
+                text-decoration: none;
+            }
+
             &>.sub-menu {
                 &>.menu-item {
                     list-style: none;
+
+                    &>a {
+                        text-decoration: none;
+                    }
                 }
             }
         }
