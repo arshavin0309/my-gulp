@@ -259,6 +259,11 @@ address {
     }
 }
 
+.widget-box {
+    width: 100%;
+    height: 500px;
+}
+
 @import '../scss/wordpress';
 @import '../scss/hovers';
 @import '../scss/1800';
