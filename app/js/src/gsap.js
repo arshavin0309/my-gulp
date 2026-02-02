@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 3️⃣ Параграфы и списки
-        tl.from(section.querySelectorAll("p, ul, ol"), {
+        const textNodes = section.querySelectorAll("p, ul, ol");
+        const filtered = [...textNodes].filter(el => !el.closest('.answer'));
+
+        tl.from(filtered, {
             x: 0,
             opacity: 0,
             duration: 0.25,
