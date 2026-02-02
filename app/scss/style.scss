@@ -206,6 +206,59 @@ address {
     }
 }
 
+.accordion {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+
+    &>li {
+        padding: 31px 24px;
+        background: grey;
+        border-radius: 20px;
+        list-style: none;
+        transition: .2s ease-in-out background;
+        cursor: pointer;
+
+        &>h3 {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 32px;
+                height: 32px;
+                background: url(../images/plus.svg) center / contain no-repeat;
+                transform: rotate(-90deg);
+                transition: .2s ease-in-out background, .2s ease-in-out transform;
+            }
+        }
+
+        &.active {
+            background: greenyellow;
+
+            &>h3 {
+                &::after {
+                    background: url(../images/minus.svg) center / contain no-repeat;
+                    transform: none;
+                }
+            }
+
+            .answer {
+                margin-top: 16px;
+            }
+        }
+    }
+
+    .answer {
+        height: 0;
+        overflow: hidden;
+        transition: .2s ease-in-out margin-top;
+    }
+}
+
 @import '../scss/wordpress';
 @import '../scss/hovers';
 @import '../scss/1800';
