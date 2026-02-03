@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const burger = document.querySelector(".header__burger");
     const menuItems = document.querySelectorAll(".header .menu > .menu-item");
     const subMenus = document.querySelectorAll(".header .menu > .menu-item > .sub-menu");
-    const headerBox = document.querySelector(".header__menu");
+    const headerBox = document.querySelector(".header .menu"); // выезжающий блок
     const mediaQuery = window.matchMedia("(max-width: 1200px)");
 
     if (subMenus.length > 0) {
