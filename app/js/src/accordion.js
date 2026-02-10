@@ -1,7 +1,7 @@
 // Структура для работы аккордеона, класс accordion не менять!
 // <ul class="accordion">
 //     <li>
-//         <h3 class="title">Заголовок</h3>
+//         <h3 class="title">Заголовок</h3> // тег можно менять
 //         <div class="answer">Контент</div>
 //     </li>
 // </ul>

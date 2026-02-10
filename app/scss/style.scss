@@ -220,7 +220,7 @@ address {
         transition: .2s ease-in-out background;
         cursor: pointer;
 
-        &>h3 {
+        &>.title {
             display: flex;
             gap: 20px;
             align-items: center;
@@ -240,7 +240,7 @@ address {
         &.active {
             background: greenyellow;
 
-            &>h3 {
+            &>.title {
                 &::after {
                     background: url(../images/minus.svg) center / contain no-repeat;
                     transform: none;
