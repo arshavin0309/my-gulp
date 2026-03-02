@@ -8,6 +8,7 @@
 }
 
 html {
+    scroll-padding-top: 170px;
     scroll-behavior: smooth;
 }
 
@@ -178,6 +179,7 @@ textarea {
 }
 
 img {
+    display: block;
     max-width: 100%;
 }
 
@@ -265,6 +267,7 @@ address {
     height: 500px;
 }
 
+@import '../scss/supports';
 @import '../scss/wordpress';
 @import '../scss/hovers';
 @import '../scss/1800';
