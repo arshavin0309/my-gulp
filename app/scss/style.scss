@@ -55,7 +55,12 @@ button {
     cursor: pointer;
 }
 
+input {
+    width: 100%;
+}
+
 textarea {
+    width: 100%;
     min-height: 115px;
     resize: none;
 }
