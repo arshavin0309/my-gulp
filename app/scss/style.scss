@@ -282,6 +282,51 @@ address {
     }
 }
 
+h1,
+.h1 {
+    margin: 0;
+    font-size: clamp(32px, 6vw, 84px);
+    line-height: 120%;
+
+    &:not(:has(+ p)) {
+        margin-bottom: 36px;
+    }
+
+    &:has(+ p) {
+        margin-bottom: 16px;
+
+        &+p {
+            margin-bottom: 36px;
+        }
+    }
+}
+
+h2,
+.h2 {
+    margin: 0;
+    font-size: clamp(24px, 5vw, 42px);
+    line-height: 120%;
+
+    &:not(:has(+ p)) {
+        margin-bottom: 48px;
+    }
+
+    &:has(+ p) {
+        margin-bottom: 16px;
+
+        &+p {
+            margin-bottom: 48px;
+        }
+    }
+}
+
+h3,
+.h3 {
+    margin: 0;
+    font-size: clamp(18px, 4vw, 24px);
+    line-height: 130%;
+}
+
 @import '../scss/supports';
 @import '../scss/wordpress';
 @import '../scss/hovers';
