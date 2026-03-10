@@ -275,6 +275,11 @@ address {
 .widget-box {
     width: 100%;
     height: 500px;
+    background: url(../images/load.avif) center / cover no-repeat;
+
+    &.calendar {
+        height: 80vh;
+    }
 }
 
 @import '../scss/supports';
