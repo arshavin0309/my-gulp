@@ -275,7 +275,14 @@ address {
 .widget-box {
     width: 100%;
     height: 500px;
-    background: url(../images/load.avif) center / cover no-repeat;
+
+    &:not(.widget-box--ru) {
+        background: #232323 url(../images/load-en.avif) center / contain no-repeat;
+    }
+
+    &--ru {
+        background: #232323 url(../images/load-ru.avif) center / contain no-repeat;
+    }
 
     &.calendar {
         height: 80vh;
