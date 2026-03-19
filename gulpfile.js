@@ -59,6 +59,7 @@ function pages() {
         }))
         .pipe(typograf({
             locale: ['ru', 'en-US'],
+            disableRule: ['common/punctuation/quote'],
             safeTags: [
                 ['<no-typography>', '</no-typography>']
             ]
