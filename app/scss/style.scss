@@ -287,6 +287,10 @@ address {
     &.calendar {
         height: 80vh;
     }
+
+    &.ticker {
+        height: auto;
+    }
 }
 
 h1,
