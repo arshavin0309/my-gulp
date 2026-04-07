@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3️⃣ Параграфы и списки
         const textNodes = section.querySelectorAll("p, ul, ol");
-        const filtered = [...textNodes].filter(el => !el.closest('.answer'));
+        const filtered = [...textNodes].filter(el => !el.closest('.accordion'));
 
         tl.from(filtered, {
             x: 0,
