@@ -151,7 +151,7 @@ function watching() {
     watch(['app/images/src/**/*.svg'], svgIcons);
     watch(['app/js/**/*.js', '!app/js/main.min.js',], scripts);
     watch(['app/components/**/*.html', 'app/pages/**/*.html'], pages);
-    watch(['app/upload/**/*'], resources);
+    // watch(['app/upload/**/*'], resources);
     watch(['app/*.html']).on('change', browserSync.reload);
 }
 
@@ -176,7 +176,7 @@ function building() {
         'app/images/*.*',
         // 'app/js/main.min.js',
         'app/*.html',
-        'app/upload/**/*',
+        // 'app/upload/**/*',
         'app/web.config',
     ], { base: 'app' })
         .pipe(replace(/style\.min\.css(\?v=\d+)?/, `style.min.css?v=${timestamp}`))
@@ -195,7 +195,8 @@ exports.pages = pages;
 exports.building = building;
 exports.scripts = scripts;
 exports.fonts = fonts;
+exports.resources = resources;
 exports.watching = watching;
 
-exports.build = series(cleanDist, building, fonts);
+exports.build = series(cleanDist, building, fonts, resources);
 exports.default = series(styles, images, svgIcons, scripts, pages, watching);
