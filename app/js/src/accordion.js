@@ -9,7 +9,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.accordion > li');
 
-    // --- начальная инициализация (всё свернуто)
+    // начальная инициализация (всё свернуто)
     items.forEach(item => {
         const answer = item.querySelector('.answer');
         if (!answer) return;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             const isOpen = item.classList.contains('active');
 
-            // --- закрываем все остальные
+            // закрываем все остальные
             items.forEach(other => {
                 if (other === item) return;
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // --- переключаем текущий
+            // переключаем текущий
             if (isOpen) {
                 item.classList.remove('active');
 

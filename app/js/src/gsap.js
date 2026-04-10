@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 1️⃣ Секция
         tl.from(section, {
             opacity: 0,
             x: 0,
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power2.out"
         });
 
-        // 2️⃣ Заголовки внутри секции
         tl.from(section.querySelectorAll("h1, h2, h3, h4, h5, h6"), {
             y: 30,
             opacity: 0,
@@ -28,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.1
         });
 
-        // 3️⃣ Параграфы и списки
         const textNodes = section.querySelectorAll("p, ul, ol");
         const filtered = [...textNodes].filter(el => !el.closest('.accordion'));
 
