@@ -47,8 +47,16 @@ function svgIcons() {
 }
 
 function resources() {
-    return src('app/upload/**/*')
-        .pipe(dest('dist/upload'))
+    const resourcesFolder = 'app/upload';
+    const destFolder = 'dist/upload';
+
+    if (!fs.existsSync(resourcesFolder)) {
+        return Promise.resolve(); // Возвращаем пустой промис, если папки нет
+    }
+
+    return src(`${resourcesFolder}/**/*`)
+        .pipe(newer(destFolder))
+        .pipe(dest(destFolder));
 }
 
 function pages() {
