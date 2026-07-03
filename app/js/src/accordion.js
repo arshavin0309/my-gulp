@@ -14,10 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const answer = item.querySelector('.answer');
         if (!answer) return;
 
-        gsap.set(answer, {
-            height: 0,
-            overflow: 'hidden'
-        });
+        if (item.classList.contains('active')) {
+            gsap.set(answer, {
+                height: 'auto',
+                overflow: 'hidden'
+            });
+        } else {
+            gsap.set(answer, {
+                height: 0,
+                overflow: 'hidden'
+            });
+        }
 
         item.classList.remove('active');
     });
