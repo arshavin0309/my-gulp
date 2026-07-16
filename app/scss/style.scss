@@ -27,6 +27,12 @@ body {
     }
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 180px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -120,7 +126,11 @@ textarea {
 }
 
 .header {
+    position: fixed;
     z-index: 1000;
+    top: 0;
+    width: 100%;
+    transition: .2s ease-in-out background;
 
     &__burger {
         display: block;
@@ -176,6 +186,10 @@ textarea {
             }
         }
     }
+
+    &.scrolled {
+        background: #000;
+    }
 }
 
 .container {
@@ -196,6 +210,8 @@ address {
 }
 
 .footer {
+    margin-top: 180px;
+
     .menu {
         &>.menu-item {
             list-style: none;
