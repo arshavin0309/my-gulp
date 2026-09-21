@@ -36,7 +36,7 @@ function setCookie(name, value, options = {}) {
 }
 
 if (!getCookie('cookies')) {
-    document.querySelector('.cookies').style = 'display: flex'
+    document.querySelector('.cookies').style = 'display: block'
 }
 
 document.querySelector('.cookies button').addEventListener('click', () => {
