@@ -34,6 +34,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: var(--between-section);
+    transition: .2s ease-in-out gap;
 }
 
 * {
@@ -201,6 +202,7 @@ textarea {
     margin: auto;
     padding-left: 30px;
     padding-right: 30px;
+    transition: .2s ease-in-out padding;
 }
 
 img,
