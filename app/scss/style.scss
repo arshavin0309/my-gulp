@@ -10,7 +10,7 @@
 }
 
 html {
-    scroll-padding-top: 170px;
+    scroll-padding-top: calc(var(--header-height) + var(--between-section));
     scroll-behavior: smooth;
 }
 
@@ -24,9 +24,6 @@ body {
     &.preload {
         opacity: 0;
         visibility: hidden;
-        transition:
-            .3s ease-in-out opacity,
-            .3s ease-in-out visibility;
     }
 }
 
@@ -34,7 +31,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: var(--between-section);
-    transition: .2s ease-in-out gap;
+}
+
+.gsap-animation {
+    transition: none !important;
 }
 
 * {
@@ -45,6 +45,7 @@ main {
     font-family: 'Manrope', sans-serif;
     scrollbar-width: thin;
     scrollbar-color: var(--black) var(--white); // 1й цвет бугунка скролла, 2й фоновый цвет скролла
+    transition: .2s ease-in-out all;
 
     &::-webkit-scrollbar {
         height: 12px;
@@ -135,7 +136,6 @@ textarea {
     z-index: 1000;
     top: 0;
     width: 100%;
-    transition: .2s ease-in-out background;
 
     &__burger {
         display: block;
@@ -146,14 +146,14 @@ textarea {
             transform-origin: center;
         }
 
-        .top,
-        .bottom {
-            transition: .3s ease-in-out transform;
-        }
+        // .top,
+        // .bottom {
+        //     transition: .3s ease-in-out transform;
+        // }
 
-        .middle {
-            transition: .3s ease-in-out opacity;
-        }
+        // .middle {
+        //     transition: .3s ease-in-out opacity;
+        // }
 
         &.active {
             .top {
@@ -202,7 +202,6 @@ textarea {
     margin: auto;
     padding-left: 30px;
     padding-right: 30px;
-    transition: .2s ease-in-out padding;
 }
 
 img,
@@ -251,7 +250,6 @@ address {
         background: grey;
         border-radius: 20px;
         list-style: none;
-        transition: .2s ease-in-out background;
         cursor: pointer;
 
         &>.title {
@@ -267,7 +265,6 @@ address {
                 height: 32px;
                 background: url(../images/plus.svg) center / contain no-repeat;
                 transform: rotate(-90deg);
-                transition: .2s ease-in-out background, .2s ease-in-out transform;
             }
         }
 
@@ -290,7 +287,6 @@ address {
     .answer {
         height: 0;
         overflow: hidden;
-        transition: .2s ease-in-out margin-top;
     }
 }
 
@@ -358,6 +354,17 @@ h3,
     margin: 0;
     font-size: clamp(18px, 4vw, 24px);
     line-height: 130%;
+}
+
+.error-hero {
+    .container {
+        min-height: calc(100vh - var(--header-height) - var(--between-section) - var(--footer-height));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 @import '../scss/supports';
