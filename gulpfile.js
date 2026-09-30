@@ -178,6 +178,7 @@ function building() {
         'app/*.html',
         // 'app/upload/**/*',
         'app/web.config',
+        'app/.htaccess',
     ], { base: 'app' })
         .pipe(replace(/style\.min\.css(\?v=\d+)?/, `style.min.css?v=${timestamp}`))
         .pipe(replace(/main\.min\.js(\?v=\d+)?/, `main.min.js?v=${timestamp}`))
