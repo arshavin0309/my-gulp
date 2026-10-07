@@ -200,8 +200,8 @@ textarea {
 .container {
     max-width: calc(1128px + 30px + 30px); // ширина самого контейнера + боковые паддинги
     margin: auto;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: clamp(16px, 2.5vmin, 30px);
+    padding-right: clamp(16px, 2.5vmin, 30px);
 }
 
 img,
