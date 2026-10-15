@@ -45,7 +45,15 @@ main {
     font-family: 'Manrope', sans-serif;
     scrollbar-width: thin;
     scrollbar-color: var(--black) var(--white); // 1й цвет бугунка скролла, 2й фоновый цвет скролла
-    transition: .2s ease-in-out all;
+
+    &:not(.accordion .answer) {
+        transition: .2s ease-in-out all;
+
+        &::before,
+        &::after {
+            transition: .2s ease-in-out all;
+        }
+    }
 
     &::-webkit-scrollbar {
         height: 12px;
