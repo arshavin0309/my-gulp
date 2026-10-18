@@ -7,6 +7,7 @@
     --white: #fff;
 
     --between-section: 180px;
+    --horizontal-padding-container: clamp(16px, 2.5vmin, 30px);
 }
 
 html {
@@ -208,8 +209,8 @@ textarea {
 .container {
     max-width: calc(1128px + 30px + 30px); // ширина самого контейнера + боковые паддинги
     margin: auto;
-    padding-left: clamp(16px, 2.5vmin, 30px);
-    padding-right: clamp(16px, 2.5vmin, 30px);
+    padding-left: var(--horizontal-padding-container);
+    padding-right: var(--horizontal-padding-container);
 }
 
 img,
