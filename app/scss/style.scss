@@ -207,7 +207,7 @@ textarea {
 }
 
 .container {
-    max-width: calc(1128px + 30px + 30px); // ширина самого контейнера + боковые паддинги
+    max-width: calc(1128px + (var(--horizontal-padding-container) * 2)); // ширина самого контейнера + боковые паддинги
     margin: auto;
     padding-left: var(--horizontal-padding-container);
     padding-right: var(--horizontal-padding-container);
