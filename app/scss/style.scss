@@ -47,6 +47,11 @@ main {
     scrollbar-width: thin;
     scrollbar-color: var(--black) var(--white); // 1й цвет бугунка скролла, 2й фоновый цвет скролла
 
+    &::before,
+    &::after {
+        box-sizing: inherit;
+    }
+
     &:not(.accordion .answer) {
         transition: .2s ease-in-out all;
 
@@ -84,6 +89,15 @@ textarea {
     width: 100%;
     height: 115px;
     resize: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
 }
 
 .upButton {
