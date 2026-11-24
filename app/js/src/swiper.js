@@ -9,7 +9,8 @@ const swiper = new Swiper('.swiper', {
     allowTouchMove: false, // отключает возможность перетаскивать слайды пальцем
     freeMode: true, // отключает «прилипание» к слайдам и включает инерцию
     watchSlidesProgress: true, // начинает отслеживать «прогресс» слайдов: насколько каждый слайд виден и в каком он состоянии
-   
+    centeredSlides: true,       // ключевой параметр: активный слайд по центру
+
     thumbs: {
         swiper: platformPlatformLeft, // platformPlatformLeft управляет слайдером
     },
